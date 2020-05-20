@@ -38,7 +38,7 @@ const Terminal = (props: TerminalProps) => {
 
   const commands: { [key: string]: string | JSX.Element } = {
     help: (
-      <div className="terminal-command-output">
+      <div>
         <p>
           Wow, I thought the only people who would visit this site would be bots
           and spammers, guess I was wrong. Just type any of the commands below
@@ -76,7 +76,7 @@ const Terminal = (props: TerminalProps) => {
     ),
     hello: "a",
     about: (
-      <div className="terminal-command-output">
+      <div>
         <p>
           Hey there! Thanks for taking such a keen interest in me. Hopefully
           you're not gonna spam or stalk me... Okay, I guess if you must stalk
@@ -142,6 +142,39 @@ const Terminal = (props: TerminalProps) => {
         </p>
       </div>
     ),
+    projects: (
+      <>
+        <p>
+          I'm always working on comp sciey (not really a word) things. Why don't
+          you check out a few of my public code repositories? Just type 'repo'
+          to get the links.
+        </p>
+        <p>
+          I have my own startup called{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://weaverworks.co.za"
+          >
+            WeaverWorks
+          </a>{" "}
+          that provides property managers and buildings with some really cool
+          software. The project is built in React with Node.js and Typescript.
+          It utilises Firebase and components from Material-UI.
+        </p>
+        <p>
+          You can also check out my university{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://pubs.cs.uct.ac.za/honsproj/cgi-bin/view/2015/feldman_meyer.zip/index.html"
+          >
+            honours project
+          </a>{" "}
+          - this one took a while!
+        </p>
+      </>
+    ),
   };
 
   const processCommand = (input: string) => {
@@ -151,7 +184,11 @@ const Terminal = (props: TerminalProps) => {
         <span className="terminal-prompt">{terminalPrompt}</span>{" "}
         <span>{input}</span>
       </div>,
-      commands[input] ?? <ErrorMessage command={input} />,
+      commands[input] ? (
+        <div className="terminal-command-output">{commands[input]}</div>
+      ) : (
+        <ErrorMessage command={input} />
+      ),
     ]);
     if (input.trim()) {
       // only add to history if the command is not empty
