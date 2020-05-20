@@ -255,6 +255,87 @@ const Terminal = (props: TerminalProps) => {
         </ul>
       </>
     ),
+    skills: (
+      <>
+        <dl>
+          <dt>Kotlin</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#00DE12", textShadow: "0 0 5px #00DE12" }}>
+              #############
+            </span>{" "}
+            ##
+          </dd>
+          <dt>Java</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#42D100", textShadow: "0 0 5px #42D100" }}>
+              ###########
+            </span>
+            {"   "}
+            ##
+          </dd>
+          <dt>TypeScript</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#42D100", textShadow: "0 0 5px #42D100" }}>
+              ###########
+            </span>
+            {"   "}
+            ##
+          </dd>
+          <dt>C# and C++</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#99D100", textShadow: "0 0 5px #99D100" }}>
+              ########
+            </span>
+            {"      "}
+            ##
+          </dd>
+          <dt>Python</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#D16200", textShadow: "0 0 5px #D16200" }}>
+              #####
+            </span>
+            {"         "}
+            ##
+          </dd>
+        </dl>
+        <dl>
+          <dt>GCP / Firebase</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#99D100", textShadow: "0 0 5px 99D100" }}>
+              #########
+            </span>
+            {"     "}
+            ##
+          </dd>
+
+          <dt>React</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#00DE12", textShadow: "0 0 5px #00DE12" }}>
+              ############
+            </span>
+            {"  "}
+            ##
+          </dd>
+
+          <dt>General web development</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#5BD100", textShadow: "0 0 5px 5BD100" }}>
+              #########
+            </span>
+            {"     "}
+            ##
+          </dd>
+        </dl>
+      </>
+    ),
   };
 
   const processCommand = (input: string) => {
