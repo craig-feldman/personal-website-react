@@ -12,12 +12,43 @@
   height: 100%;
   font-size: 15px;
   line-height: 20px;
-  white-space: pre;
-  color: #ffffff;
+  white-space: pre-wrap;
+  color: #aaa;
   font-family: monospace;
   display: flex;
   flex-direction: column;
 }
+
+.terminal-banner {
+  color: teal;
+}
+
+.terminal-welcome-message {
+  margin-bottom: 20px;
+}
+
+.terminal-command-output {
+  padding: 10px;
+  max-width: 800px;
+}
+
+.terminal-command-output dt {
+  color: #eeeeee;
+  text-shadow: 0 0 4px #eeeeee;
+}
+
+.terminal-command-output dd {
+  margin-inline-start: 20px;
+}
+
+.terminal-command-output dd:not(:last-child) {
+  margin-block-end: 0.3em;
+}
+
+.terminal-command-output dd::before {
+  content: "- ";
+}
+
 .terminal-input-area {
   display: inline-flex;
   width: 100%;
@@ -49,5 +80,15 @@
 }
 
 .terminal-glow {
-  text-shadow: 0 0 3px #ff0000;
+  color: #eeeeee;
+  text-shadow: 0 0 4px #eeeeee;
+}
+
+a {
+  color: purple;
+}
+a:hover {
+  color: black;
+  background-color: purple;
+  text-decoration: none;
 }

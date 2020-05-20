@@ -32,36 +32,116 @@ const Terminal = (props: TerminalProps) => {
   useEffect(scrollToBottom, [output]);
   useEffect(() => console.log("INPUTREF CHANGED ", inputRef), [inputRef]);
 
-  const glow = (a: string) => a;
-
-  // const glow = (text: string) => {
-  //   return <span className="terminal-glow">{text}</span>;
-  // };
-
-  const a = `Hey there! Thanks for taking such a keen interest in me.
-  Hopefully you're not gonna spam or stalk me...
-  Okay, I guess if you must stalk me, just give me fair warning so I can look presentable when you arrive at my door.
-  
-  Right, so, where to begin? Well, my parents met in... Nah, just kidding.
-  As you probably know, my name is ${glow("Craig Feldman")}.
-  I'm a ${getAge(new Date(1992, 12, 23))} year old ${glow(
-    "Computer Scientist"
-  )} born and bred in the beautiful South Africa and currently living in Cape Town.
-  I graduated with distinction from University of Cape Town and have an MSc degree from the University of Oxford, where I was awarded a full academic scholarship.
-  Nowadays I'm developing a method to download food... I wish!
-  Some of my interests include ${glow(
-    "machine learning, computer security, and cryptography"
-  )}. I'm also pretty into fly fishing!
-  
-  My previous formal work experience includes working on asset management software (Fundamental Software - https://www.fundamental.net), as well as working for a content creation app (Over - https://madewithover.com).
-  
-  I am currently focusing on some personal projects, but please feel free to get in touch with me to discuss any cool opportunities!
-  My contact details can be found by typing 'contact', and if you would like to check out my CV, simply type 'download_CV'.`;
+  const glow = (text: string) => {
+    return <span className="terminal-glow">{text}</span>;
+  };
 
   const commands: { [key: string]: string | JSX.Element } = {
-    help: "a",
+    help: (
+      <div className="terminal-command-output">
+        <p>
+          Wow, I thought the only people who would visit this site would be bots
+          and spammers, guess I was wrong. Just type any of the commands below
+          to get some more info. You can even type a few letters and press [tab]
+          to autocomplete.
+        </p>
+        <p>
+          <dl>
+            <dt>about</dt>
+            <dd>Stop stalking me</dd>
+            <dt>projects</dt>
+            <dd>Yeah, I've made some cool stuff before</dd>
+            <dt>skills</dt>
+            <dd>I'm pretty good at some things</dd>
+            <dt>awards</dt>
+            <dd>A bit of boasting</dd>
+            <dt>repo</dt>
+            <dd>Take a look at some of my work</dd>
+            <dt>download_cv</dt>
+            <dd>Take a look at some of my work</dd>
+            <dt>contact</dt>
+            <dd>Bring on the spam</dd>
+            <dt>credits</dt>
+            <dd>Thanks for the help</dd>
+            <dt>all</dt>
+            <dd>Tell me everything</dd>
+          </dl>
+        </p>
+
+        <p>
+          P.S. There's a pretty awesome command that I haven't told you about -
+          see if you can find it! Hint: Check out the source code.
+        </p>
+      </div>
+    ),
     hello: "a",
-    about: <>{a}</>,
+    about: (
+      <div className="terminal-command-output">
+        <p>
+          Hey there! Thanks for taking such a keen interest in me. Hopefully
+          you're not gonna spam or stalk me... Okay, I guess if you must stalk
+          me, just give me fair warning so I can look presentable when you
+          arrive at my door.
+        </p>
+        <p>
+          Right, so, where to begin? Well, my parents met in... Nah, just
+          kidding.
+          <br />
+          As you probably know, my name is {glow("Craig Feldman")}. I'm a{" "}
+          {getAge(new Date(1992, 12, 23))} year old {glow("Computer Scientist")}{" "}
+          born and bred in the beautiful South Africa and currently living in
+          Cape Town.
+        </p>
+        <p>
+          I graduated with distinction from University of Cape Town and have an
+          MSc degree from the University of Oxford, where I was awarded a full
+          academic scholarship. Nowadays I'm developing a method to download
+          food... I wish!
+        </p>
+        <p>
+          Some of my interests include{" "}
+          {glow("machine learning, computer security, and cryptography")}. I'm
+          also pretty into fly fishing!
+        </p>
+        <p>
+          My previous formal work experience includes working on asset
+          management software{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.fundamental.net"
+          >
+            Fundamental Software
+          </a>
+          , as well as working for a content creation app{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://madewithover.com"
+          >
+            Over
+          </a>
+          .
+        </p>
+        <p>
+          I am currently focusing on some personal projects and am bootstrapping
+          my own startup (check it out,{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://weaverworks.co.za"
+          >
+            here
+          </a>
+          ) but please feel free to get in touch with me to discuss any cool
+          opportunities!
+        </p>
+        <p>
+          My contact details can be found by typing 'contact', and if you would
+          like to check out my CV, simply type 'download_CV'.
+        </p>
+      </div>
+    ),
   };
 
   const processCommand = (input: string) => {
@@ -221,7 +301,7 @@ type WelcomerMessageProps = {
   inputRef: React.RefObject<HTMLInputElement>;
 };
 const WelcomeMessage = (props: WelcomerMessageProps) => {
-  console.log("rendering");
+  console.log("rendering welcome message");
   const welcomeMessageRef = React.createRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -249,7 +329,9 @@ const WelcomeMessage = (props: WelcomerMessageProps) => {
     }, 0);
   }, []);
 
-  return <div ref={welcomeMessageRef}></div>;
+  return (
+    <div ref={welcomeMessageRef} className="terminal-welcome-message"></div>
+  );
 };
 
 export default Terminal;
