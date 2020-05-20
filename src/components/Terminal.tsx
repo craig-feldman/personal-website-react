@@ -228,6 +228,33 @@ const Terminal = (props: TerminalProps) => {
         </dl>
       </>
     ),
+    repo: (
+      <>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/craig-feldman"
+            >
+              GitHub
+            </a>{" "}
+            - Unfortunately, I could only make a small subset of my projects
+            public.
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://bitbucket.org/fldcra001"
+            >
+              Bitbucket
+            </a>{" "}
+            - A few university projects.
+          </li>
+        </ul>
+      </>
+    ),
   };
 
   const processCommand = (input: string) => {

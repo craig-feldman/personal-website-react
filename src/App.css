@@ -49,6 +49,10 @@
   content: "- ";
 }
 
+.terminal-command-output ul {
+  margin: 0;
+}
+
 .terminal-input-area {
   display: inline-flex;
   width: 100%;
