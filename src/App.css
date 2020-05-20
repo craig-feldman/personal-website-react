@@ -39,6 +39,11 @@
   width: 100%;
 }
 
+.terminal-error-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .terminal-error {
   color: red;
 }
