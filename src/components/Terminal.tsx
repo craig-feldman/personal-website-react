@@ -175,6 +175,20 @@ const Terminal = (props: TerminalProps) => {
         </p>
       </>
     ),
+    contacts: (
+      <>
+        <dl>
+          <dt>Email</dt>
+          <dd>
+            <a href="mailto:craig.feldy@gmail.com">craig.feldy@gmail.com</a>
+          </dd>
+          <dt>Smoke signals</dt>
+          <dd>general Cape Town region</dd>
+          <dt>myspace</dt>
+          <dd>just kidding</dd>
+        </dl>
+      </>
+    ),
   };
 
   const processCommand = (input: string) => {
