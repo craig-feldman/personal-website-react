@@ -189,6 +189,45 @@ const Terminal = (props: TerminalProps) => {
         </dl>
       </>
     ),
+    awards: (
+      <>
+        <dl>
+          <dt>2016</dt>
+          <dd>University of Oxford full scholarship</dd>
+          <dd>
+            Standard Bank Africa Chairman's Scholarship (
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://graduate.standardbank.com/standimg/Graduate/DerekCooperAfricaScholarship.html"
+            >
+              view scholarship
+            </a>
+            )
+          </dd>
+
+          <dt>2015</dt>
+          <dd>Dean's Merit List</dd>
+
+          <dt>2014</dt>
+          <dd>Dean's Merit List</dd>
+          <dd>BSG Prize (Best 3rd year Computer Science student)</dd>
+          <dd>Class Medal (1st place) for all 3 Computer Science courses</dd>
+          <dd>Commerce Faculty Scholarship</dd>
+
+          <dt>2013</dt>
+          <dd>Dean's Merit List</dd>
+          <dd>Computer Science Merit Award (top 5%)</dd>
+          <dd>Class Medal for Inferential Statistics</dd>
+          <dd>Computer Science Merit Award (top 5%)</dd>
+          <dd>Commerce Faculty Scholarship</dd>
+
+          <dt>2012</dt>
+          <dd>Dean's Merit List</dd>
+          <dd>Computer Science Merit Award (top 5%)</dd>
+        </dl>
+      </>
+    ),
   };
 
   const processCommand = (input: string) => {
