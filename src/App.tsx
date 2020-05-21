@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React from "react";
 import "./App.css";
 import Terminal from "./components/Terminal";
 

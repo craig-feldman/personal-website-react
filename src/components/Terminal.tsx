@@ -45,28 +45,26 @@ const Terminal = (props: TerminalProps) => {
           to get some more info. You can even type a few letters and press [tab]
           to autocomplete.
         </p>
-        <p>
-          <dl>
-            <dt>about</dt>
-            <dd>Stop stalking me</dd>
-            <dt>projects</dt>
-            <dd>Yeah, I've made some cool stuff before</dd>
-            <dt>skills</dt>
-            <dd>I'm pretty good at some things</dd>
-            <dt>awards</dt>
-            <dd>A bit of boasting</dd>
-            <dt>repo</dt>
-            <dd>Take a look at some of my work</dd>
-            <dt>download_cv</dt>
-            <dd>Take a look at some of my work</dd>
-            <dt>contact</dt>
-            <dd>Bring on the spam</dd>
-            <dt>credits</dt>
-            <dd>Thanks for the help</dd>
-            <dt>all</dt>
-            <dd>Tell me everything</dd>
-          </dl>
-        </p>
+        <dl>
+          <dt>about</dt>
+          <dd>Stop stalking me</dd>
+          <dt>projects</dt>
+          <dd>Yeah, I've made some cool stuff before</dd>
+          <dt>skills</dt>
+          <dd>I'm pretty good at some things</dd>
+          <dt>awards</dt>
+          <dd>A bit of boasting</dd>
+          <dt>repo</dt>
+          <dd>Take a look at some of my work</dd>
+          <dt>download_cv</dt>
+          <dd>Take a look at some of my work</dd>
+          <dt>contact</dt>
+          <dd>Bring on the spam</dd>
+          <dt>credits</dt>
+          <dd>Thanks for the help</dd>
+          <dt>all</dt>
+          <dd>Tell me everything</dd>
+        </dl>
 
         <p>
           P.S. There's a pretty awesome command that I haven't told you about -
@@ -74,7 +72,6 @@ const Terminal = (props: TerminalProps) => {
         </p>
       </div>
     ),
-    hello: "a",
     about: (
       <div>
         <p>
@@ -338,22 +335,50 @@ const Terminal = (props: TerminalProps) => {
     ),
   };
 
-  const processCommand = (input: string) => {
-    setOutput([
-      ...output,
-      <div>
-        <span className="terminal-prompt">{terminalPrompt}</span>{" "}
-        <span>{input}</span>
-      </div>,
-      commands[input] ? (
-        <div className="terminal-command-output">{commands[input]}</div>
-      ) : (
-        <ErrorMessage command={input} />
-      ),
-    ]);
-    if (input.trim()) {
-      // only add to history if the command is not empty
-      setHistory([...history, input]);
+  const processCommand = (inputCommand: string) => {
+    if (inputCommand === "clear") {
+      setOutput([]);
+    } else if (inputCommand === "all") {
+      // Output all commands in a custom order, and clears previous output.
+      setOutput(
+        [
+          "about",
+          "awards",
+          "skills",
+          "projects",
+          "repo",
+          "contacts",
+          "credits",
+        ].map((command) => (
+          <>
+            <div>
+              <span className="terminal-prompt">{terminalPrompt}</span>{" "}
+              <span>{command}</span>
+            </div>
+            <div className="terminal-command-output">{commands[command]}</div>
+          </>
+        ))
+      );
+    } else {
+      setOutput([
+        ...output,
+        <div>
+          <span className="terminal-prompt">{terminalPrompt}</span>{" "}
+          <span>{inputCommand}</span>
+        </div>,
+        commands[inputCommand] ? (
+          <div className="terminal-command-output">
+            {commands[inputCommand]}
+          </div>
+        ) : (
+          <ErrorMessage command={inputCommand} />
+        ),
+      ]);
+    }
+
+    // Add command to to history if the command is not empty
+    if (inputCommand.trim()) {
+      setHistory([...history, inputCommand]);
       setHistoryIndex(history.length + 1);
     }
   };
@@ -404,9 +429,7 @@ const Terminal = (props: TerminalProps) => {
         {welcomeMessage && (
           <WelcomeMessage message={welcomeMessage} inputRef={inputRef} />
         )}
-        {output.map((o, key) => (
-          <div key={key}>{o}</div>
-        ))}
+        <TerminalOutput outputs={output} />
         <InputArea
           setOutput={setOutput}
           processCommand={processCommand}
@@ -417,6 +440,14 @@ const Terminal = (props: TerminalProps) => {
       </div>
     </div>
   );
+};
+
+type OutputProps = {
+  outputs: (string | JSX.Element)[];
+};
+const TerminalOutput = (props: OutputProps) => {
+  const outputList = props.outputs.map((o, key) => <div key={key}>{o}</div>);
+  return <>{outputList}</>;
 };
 
 type InputAreaProps = {
@@ -464,7 +495,7 @@ const InputArea = (props: InputAreaProps) => {
         className="terminal-input"
         name="input"
         value={input}
-        onInput={handleInputChange}
+        onChange={handleInputChange}
         onKeyDown={handleInputKeyDown}
         ref={props.inputRef}
         spellCheck="false"
@@ -525,6 +556,7 @@ const WelcomeMessage = (props: WelcomerMessageProps) => {
         }
       }
     }, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
