@@ -436,6 +436,7 @@ const Terminal = (props: TerminalProps) => {
           getHistory={getHistory}
           getAutocomplete={getAutocomplete}
           inputRef={inputRef}
+          terminalPrompt={terminalPrompt}
         />
       </div>
     </div>
@@ -451,7 +452,7 @@ const TerminalOutput = (props: OutputProps) => {
 };
 
 type InputAreaProps = {
-  terminalPrompt?: string;
+  terminalPrompt: string;
   setOutput: React.Dispatch<React.SetStateAction<(string | JSX.Element)[]>>;
   processCommand: (input: string) => void;
   getHistory: (direction: "up" | "down") => string;
@@ -489,7 +490,7 @@ const InputArea = (props: InputAreaProps) => {
   };
   return (
     <div className="terminal-input-area">
-      <span className="terminal-prompt">{props.terminalPrompt || ">"}</span>
+      <span className="terminal-prompt">{props.terminalPrompt}</span>
       <input
         type="text"
         className="terminal-input"

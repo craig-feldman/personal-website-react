@@ -20,6 +20,11 @@
 
 .terminal-banner {
   color: teal;
+  text-shadow: 0 0 5px teal;
+  line-height: normal;
+  font-weight: bold;
+  font-size: min(2.7vw, 18px);
+  margin-bottom: 20px;
 }
 
 .terminal-welcome-message {
