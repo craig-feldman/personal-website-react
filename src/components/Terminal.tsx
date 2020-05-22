@@ -48,10 +48,11 @@ const Terminal = (props: TerminalProps) => {
     "help",
     "about",
     "projects",
-    "contacts",
+    "contact",
     "awards",
     "repo",
     "skills",
+    "website",
   ] as const;
   type EchoCommand = typeof echoCommands[number];
   const utilityCommands = ["clear", "all", "download_cv"] as const;
@@ -91,11 +92,11 @@ const Terminal = (props: TerminalProps) => {
           <dt>repo</dt>
           <dd>Take a look at some of my work</dd>
           <dt>download_cv</dt>
-          <dd>Take a look at some of my work</dd>
+          <dd>Check out my CV [pdf - 168KB]</dd>
           <dt>contact</dt>
           <dd>Bring on the spam</dd>
-          <dt>credits</dt>
-          <dd>Thanks for the help</dd>
+          <dt>website</dt>
+          <dd>How I built this</dd>
           <dt>all</dt>
           <dd>Tell me everything</dd>
         </dl>
@@ -206,7 +207,7 @@ const Terminal = (props: TerminalProps) => {
         </p>
       </>
     ),
-    contacts: (
+    contact: (
       <>
         <dl>
           <dt>Email</dt>
@@ -367,6 +368,51 @@ const Terminal = (props: TerminalProps) => {
         </dl>
       </>
     ),
+    website: (
+      <>
+        <p>
+          I built this website from scratch using {glow("React")} and{" "}
+          {glow("TypeScript")}. It is a rewrite of my{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/craig-feldman/personal-website"
+          >
+            previous
+          </a>{" "}
+          website that used{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://terminal.jcubic.pl/"
+          >
+            JQuery Terminal Plugin
+          </a>{" "}
+          (and some inspiration from{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.ronniepyne.com)"
+          >
+            Ronnie Pyne
+          </a>
+          ).
+        </p>
+        <p>
+          The source code for this site can be found on{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/craig-feldman/personal-website-react"
+          >
+            GitHub
+          </a>
+          . Feel free to use this website for inspiration, or go ahead and copy
+          some of the code! If you do, all I ask is that you give this site a
+          mention :)
+        </p>
+      </>
+    ),
   };
 
   const processCommand = (input: string) => {
@@ -415,7 +461,8 @@ const Terminal = (props: TerminalProps) => {
               "skills",
               "projects",
               "repo",
-              "contacts",
+              "contact",
+              "website",
             ].map((command) => (
               <>
                 <div>
@@ -432,10 +479,7 @@ const Terminal = (props: TerminalProps) => {
         }
         case "download_cv": {
           setOutput([...output, commandRecord]);
-          downloadFile(
-            "/downloads/Craig Feldman - Curriculum Vitae (web).pdf",
-            "Craig Feldman - Curriculum Vitae.pdf"
-          );
+          downloadFile("CV.pdf", "Craig Feldman - Curriculum Vitae.pdf");
           break;
         }
       }
