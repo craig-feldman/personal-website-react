@@ -31,7 +31,7 @@ const Terminal = (props: TerminalProps) => {
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(3);
   const inputRef = React.createRef<HTMLInputElement>();
-  console.log("Rendering temrinal");
+  console.log("Rendering terminal");
 
   const scrollToBottom = () => {
     inputRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,7 +44,33 @@ const Terminal = (props: TerminalProps) => {
     return <span className="terminal-glow">{text}</span>;
   };
 
-  const commands: { [key: string]: string | JSX.Element } = {
+  const echoCommands = [
+    "help",
+    "about",
+    "projects",
+    "contacts",
+    "awards",
+    "repo",
+    "skills",
+  ] as const;
+  type EchoCommand = typeof echoCommands[number];
+  const utilityCommands = ["clear", "all", "download_cv"] as const;
+  type UtilityCommand = typeof utilityCommands[number];
+  const allCommands = [...echoCommands, ...utilityCommands] as const;
+  type Command = typeof allCommands[number];
+
+  function isEchoCommand(arg: string): arg is EchoCommand {
+    return (echoCommands as ReadonlyArray<string>).includes(arg);
+  }
+
+  function isUtilityCommand(arg: string): arg is UtilityCommand {
+    return (utilityCommands as ReadonlyArray<string>).includes(arg);
+  }
+
+  function isValidCommand(arg: string): arg is Command {
+    return isEchoCommand(arg) || isUtilityCommand(arg);
+  }
+  const commands: { [key in EchoCommand]: string | JSX.Element } = {
     help: (
       <div>
         <p>
@@ -343,51 +369,76 @@ const Terminal = (props: TerminalProps) => {
     ),
   };
 
-  const processCommand = (inputCommand: string) => {
-    if (inputCommand === "clear") {
-      setOutput([]);
-    } else if (inputCommand === "all") {
-      // Output all commands in a custom order, and clears previous output.
-      setOutput(
-        [
-          "about",
-          "awards",
-          "skills",
-          "projects",
-          "repo",
-          "contacts",
-          "credits",
-        ].map((command) => (
-          <>
-            <div>
-              <span className="terminal-prompt">{terminalPrompt}</span>{" "}
-              <span>{command}</span>
-            </div>
-            <div className="terminal-command-output">{commands[command]}</div>
-          </>
-        ))
-      );
-    } else {
-      setOutput([
-        ...output,
-        <div>
-          <span className="terminal-prompt">{terminalPrompt}</span>{" "}
-          <span>{inputCommand}</span>
-        </div>,
-        commands[inputCommand] ? (
-          <div className="terminal-command-output">
-            {commands[inputCommand]}
-          </div>
-        ) : (
-          <ErrorMessage command={inputCommand} />
-        ),
-      ]);
-    }
+  const processCommand = (input: string) => {
+    // Add command to output
+    const commandRecord = (
+      <div>
+        <span className="terminal-prompt">{terminalPrompt}</span>{" "}
+        <span>{input}</span>
+      </div>
+    );
 
     // Add command to to history if the command is not empty
-    if (inputCommand.trim()) {
-      setHistory([...history, inputCommand]);
+    if (input.trim()) {
+      setHistory([...history, input]);
       setHistoryIndex(history.length + 1);
+    }
+
+    // Now process command, ignoring case
+    const inputCommand = input.toLowerCase();
+    if (!isValidCommand(inputCommand)) {
+      setOutput([
+        ...output,
+        commandRecord,
+        <ErrorMessage command={inputCommand} />,
+      ]);
+    } else if (isEchoCommand(inputCommand)) {
+      setOutput([
+        ...output,
+        commandRecord,
+        <div className="terminal-command-output">{commands[inputCommand]}</div>,
+      ]);
+    } else if (isUtilityCommand(inputCommand)) {
+      switch (inputCommand) {
+        case "clear": {
+          setOutput([]);
+          break;
+        }
+        case "all": {
+          // Output all commands in a custom order, and clears previous output.
+
+          setOutput([
+            commandRecord,
+            ...[
+              "about",
+              "awards",
+              "skills",
+              "projects",
+              "repo",
+              "contacts",
+            ].map((command) => (
+              <>
+                <div>
+                  <span className="terminal-prompt">--</span>{" "}
+                  <span>{command}</span>
+                </div>
+                <div className="terminal-command-output">
+                  {commands[command as EchoCommand]}
+                </div>
+              </>
+            )),
+          ]);
+          break;
+        }
+        case "download_cv": {
+          setOutput([...output, commandRecord]);
+          downloadFile(
+            "/downloads/Craig Feldman - Curriculum Vitae (web).pdf",
+            "Craig Feldman - Curriculum Vitae.pdf"
+          );
+          break;
+        }
+      }
     }
   };
 
@@ -404,7 +455,6 @@ const Terminal = (props: TerminalProps) => {
   };
 
   const getAutocomplete = (input: string) => {
-    const allCommands = Object.keys(commands);
     const matchingCommands = allCommands.filter((c) => c.startsWith(input));
     console.log(matchingCommands);
     if (matchingCommands.length === 1) {
@@ -475,7 +525,6 @@ const InputArea = (props: InputAreaProps) => {
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log("Key up: " + event.key);
     switch (event.key) {
       case "Enter":
         props.processCommand(input);
