@@ -7,6 +7,7 @@ const getYear = () => {
 };
 
 const welcomeMessage = `Welcome to my site fellow humans and bots.
+
 Type 'help' to view a list of available commands.
 `;
 

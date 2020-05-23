@@ -67,6 +67,10 @@
   margin-top: 0;
 }
 
+.terminal-command-record {
+  scroll-margin: 15px;
+}
+
 .terminal-input-area {
   display: inline-flex;
   width: 100%;

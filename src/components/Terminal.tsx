@@ -30,19 +30,14 @@ const Terminal = (props: TerminalProps) => {
   const [output, setOutput] = useState<(string | JSX.Element)[]>([]);
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(3);
-  const inputRef = React.createRef<HTMLInputElement>();
-  console.log("Rendering terminal");
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const scrollRef = React.useRef<HTMLDivElement | null>(null);
 
-  const scrollToBottom = () => {
-    inputRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollLastCommandTop = () => {
+    scrollRef.current?.scrollIntoView();
   };
 
-  useEffect(scrollToBottom, [output]);
-  useEffect(() => console.log("INPUTREF CHANGED ", inputRef), [inputRef]);
-
-  const glow = (text: string) => {
-    return <span className="terminal-glow">{text}</span>;
-  };
+  useEffect(scrollLastCommandTop, [output]);
 
   const echoCommands = [
     "help",
@@ -71,14 +66,19 @@ const Terminal = (props: TerminalProps) => {
   function isValidCommand(arg: string): arg is Command {
     return isEchoCommand(arg) || isUtilityCommand(arg);
   }
-  const commands: { [key in EchoCommand]: string | JSX.Element } = {
+
+  const glow = (text: string) => {
+    return <span className="terminal-glow">{text}</span>;
+  };
+
+  const commands: { [key in EchoCommand]: JSX.Element } = {
     help: (
       <div>
         <p>
           Wow, I thought the only people who would visit this site would be bots
           and spammers, guess I was wrong. Just type any of the commands below
           to get some more info. You can even type a few letters and press [tab]
-          to autocomplete.
+          or '.' to autocomplete.
         </p>
         <dl>
           <dt>about</dt>
@@ -100,11 +100,6 @@ const Terminal = (props: TerminalProps) => {
           <dt>all</dt>
           <dd>Tell me everything</dd>
         </dl>
-
-        <p>
-          P.S. There's a pretty awesome command that I haven't told you about -
-          see if you can find it! Hint: Check out the source code.
-        </p>
       </div>
     ),
     about: (
@@ -416,9 +411,13 @@ const Terminal = (props: TerminalProps) => {
   };
 
   const processCommand = (input: string) => {
-    // Add command to output
+    // Store a record of this command with a ref to allow us to scroll it into view.
+    // Note: We use a ref callback here because setting the ref directly, then clearing output seems to set the ref to null.
     const commandRecord = (
-      <div>
+      <div
+        ref={(el) => (scrollRef.current = el)}
+        className="terminal-command-record"
+      >
         <span className="terminal-prompt">{terminalPrompt}</span>{" "}
         <span>{input}</span>
       </div>
@@ -436,7 +435,9 @@ const Terminal = (props: TerminalProps) => {
       setOutput([
         ...output,
         commandRecord,
-        <ErrorMessage command={inputCommand} />,
+        <div className="terminal-command-output">
+          <ErrorMessage command={inputCommand} />
+        </div>,
       ]);
     } else if (isEchoCommand(inputCommand)) {
       setOutput([
@@ -451,30 +452,28 @@ const Terminal = (props: TerminalProps) => {
           break;
         }
         case "all": {
-          // Output all commands in a custom order, and clears previous output.
+          // Output all commands in a custom order.
+          const allCommandsOutput = [
+            "about",
+            "awards",
+            "skills",
+            "projects",
+            "repo",
+            "contact",
+            "website",
+          ].map((command) => (
+            <>
+              <div>
+                <span className="terminal-prompt">--</span>{" "}
+                <span>{command}</span>
+              </div>
+              <div className="terminal-command-output">
+                {commands[command as EchoCommand]}
+              </div>
+            </>
+          ));
 
-          setOutput([
-            commandRecord,
-            ...[
-              "about",
-              "awards",
-              "skills",
-              "projects",
-              "repo",
-              "contact",
-              "website",
-            ].map((command) => (
-              <>
-                <div>
-                  <span className="terminal-prompt">--</span>{" "}
-                  <span>{command}</span>
-                </div>
-                <div className="terminal-command-output">
-                  {commands[command as EchoCommand]}
-                </div>
-              </>
-            )),
-          ]);
+          setOutput([commandRecord, ...allCommandsOutput]);
           break;
         }
         case "download_cv": {
@@ -645,7 +644,7 @@ type WelcomerMessageProps = {
 };
 const WelcomeMessage = (props: WelcomerMessageProps) => {
   console.log("rendering welcome message");
-  const welcomeMessageRef = React.createRef<HTMLDivElement>();
+  const welcomeMessageRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (props.inputRef.current) {
@@ -669,9 +668,8 @@ const WelcomeMessage = (props: WelcomerMessageProps) => {
           props.inputRef.current.focus();
         }
       }
-    }, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    }, 40);
+  }, [props.inputRef, props.message]);
 
   return (
     <div ref={welcomeMessageRef} className="terminal-welcome-message"></div>
