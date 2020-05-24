@@ -503,14 +503,16 @@ const Terminal = (props: TerminalProps) => {
     if (matchingCommands.length === 1) {
       return matchingCommands[0];
     } else {
-      setOutput([
-        ...output,
-        <div>
+      const commandRecord = (
+        <div
+          ref={(el) => (scrollRef.current = el)}
+          className="terminal-command-record"
+        >
           <span className="terminal-prompt">{terminalPrompt}</span>{" "}
           <span>{input}</span>
-        </div>,
-        matchingCommands.join("\t"),
-      ]);
+        </div>
+      );
+      setOutput([...output, commandRecord, matchingCommands.join("\t")]);
       return input;
     }
   };
