@@ -613,7 +613,9 @@ const InputArea = (props: InputAreaProps) => {
         onChange={handleInputChange}
         onKeyDown={handleInputKeyDown}
         ref={props.inputRef}
-        spellCheck="false"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoComplete="off"
       />
     </div>
   );
