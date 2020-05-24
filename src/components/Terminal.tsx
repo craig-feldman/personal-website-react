@@ -499,7 +499,6 @@ const Terminal = (props: TerminalProps) => {
 
   const getAutocomplete = (input: string) => {
     const matchingCommands = allCommands.filter((c) => c.startsWith(input));
-    console.log(matchingCommands);
     if (matchingCommands.length === 1) {
       return matchingCommands[0];
     } else {
@@ -597,7 +596,6 @@ const InputArea = (props: InputAreaProps) => {
       case "Tab":
         // Provide autocomplete on tab. For mobile, we have to handle autocomplete in the input's onChange event.
         event.preventDefault();
-        console.log("Tab pressed");
         setInput(props.getAutocomplete(input));
         break;
     }
@@ -647,7 +645,6 @@ type WelcomerMessageProps = {
   inputRef: React.RefObject<HTMLInputElement>;
 };
 const WelcomeMessage = (props: WelcomerMessageProps) => {
-  console.log("rendering welcome message");
   const welcomeMessageRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
