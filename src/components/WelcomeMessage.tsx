@@ -26,7 +26,7 @@ const WelcomeMessage = (props: WelcomeMessageProps) => {
           props.inputRef.current.focus();
         }
       }
-    }, 40);
+    }, 30);
   }, [props.inputRef, props.message]);
   return (
     <div ref={welcomeMessageRef} className="terminal-welcome-message"></div>
