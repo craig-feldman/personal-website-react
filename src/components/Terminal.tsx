@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-// import "./App.css";
+import Banner from "./Banner";
+import TerminalOutput from "./TerminalOutput";
+import InputArea from "./InputArea";
+import ErrorMessage from "./ErrorMessage";
+import WelcomeMessage from "./WelcomeMessage";
 
 // Just a little helper function so I don't have to continually update my age
-function getAge(birthDate: Date) {
+const getAge = (birthDate: Date) => {
   var today = new Date();
   var age = today.getFullYear() - birthDate.getFullYear();
   var m = today.getMonth() - birthDate.getMonth();
@@ -10,7 +14,7 @@ function getAge(birthDate: Date) {
     age--;
   }
   return age;
-}
+};
 
 const downloadFile = (uri: string, downloadName: string) => {
   const link = document.createElement("a");
@@ -548,138 +552,6 @@ const Terminal = (props: TerminalProps) => {
         />
       </div>
     </div>
-  );
-};
-
-type OutputProps = {
-  outputs: (string | JSX.Element)[];
-};
-const TerminalOutput = (props: OutputProps) => {
-  const outputList = props.outputs.map((o, key) => <div key={key}>{o}</div>);
-  return <>{outputList}</>;
-};
-
-type InputAreaProps = {
-  terminalPrompt: string;
-  setOutput: React.Dispatch<React.SetStateAction<(string | JSX.Element)[]>>;
-  processCommand: (input: string) => void;
-  getHistory: (direction: "up" | "down") => string;
-  getAutocomplete: (input: string) => string;
-  inputRef: React.RefObject<HTMLInputElement>;
-};
-const InputArea = (props: InputAreaProps) => {
-  const [input, setInput] = useState("");
-
-  /**
-   * Sets the input state to the value of the input.
-   *
-   * If the input is a period, we get the autocomplete for the input up to, but excluding the period.
-   * We handle this case specially to allow autocomplete on mobile because KeyboardEvent.key tends to be 'unidentified' for inputs on mobile keyboards.
-   */
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    if (inputValue.charAt(inputValue.length - 1) === ".") {
-      setInput(
-        props.getAutocomplete(inputValue.substring(0, inputValue.length - 1))
-      );
-    } else setInput(inputValue);
-  };
-
-  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (event.key) {
-      case "Enter":
-        props.processCommand(input);
-        setInput("");
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        setInput(props.getHistory("up"));
-        break;
-      case "ArrowDown":
-        event.preventDefault();
-        setInput(props.getHistory("down"));
-        break;
-      case "Tab":
-        // Provide autocomplete on tab. For mobile, we have to handle autocomplete in the input's onChange event.
-        event.preventDefault();
-        setInput(props.getAutocomplete(input));
-        break;
-    }
-  };
-  return (
-    <div className="terminal-input-area">
-      <span className="terminal-prompt">{props.terminalPrompt}</span>
-      <input
-        type="text"
-        className="terminal-input"
-        name="input"
-        value={input}
-        onChange={handleInputChange}
-        onKeyDown={handleInputKeyDown}
-        ref={props.inputRef}
-        spellCheck={false}
-        autoCapitalize="off"
-        autoComplete="off"
-      />
-    </div>
-  );
-};
-
-type ErrorMessageProps = {
-  command: string;
-};
-const ErrorMessage = (props: ErrorMessageProps) => {
-  return (
-    <div className="terminal-error-group">
-      <span className="terminal-error">
-        {`command not found: ${props.command}.`}
-      </span>
-      <span>{`Type 'help' to view a list of available commands`}</span>
-    </div>
-  );
-};
-
-type BannerProps = {
-  banner: string;
-};
-const Banner = (props: BannerProps) => (
-  <div className="terminal-banner">{props.banner}</div>
-);
-
-type WelcomerMessageProps = {
-  message: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-};
-const WelcomeMessage = (props: WelcomerMessageProps) => {
-  const welcomeMessageRef = React.useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (props.inputRef.current) {
-      props.inputRef.current.disabled = true;
-    }
-    let index = 0;
-    const typeText = setInterval(() => {
-      if (!welcomeMessageRef.current) {
-        return;
-      }
-
-      welcomeMessageRef.current.insertAdjacentText(
-        "beforeend",
-        props.message[index++]
-      );
-
-      if (index === props.message.length) {
-        clearInterval(typeText);
-        if (props.inputRef.current) {
-          props.inputRef.current.disabled = false;
-          props.inputRef.current.focus();
-        }
-      }
-    }, 40);
-  }, [props.inputRef, props.message]);
-
-  return (
-    <div ref={welcomeMessageRef} className="terminal-welcome-message"></div>
   );
 };
 
