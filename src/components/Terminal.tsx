@@ -103,6 +103,8 @@ const Terminal = (props: TerminalProps) => {
           <dd>How I built this</dd>
           <dt>all</dt>
           <dd>Tell me everything</dd>
+          <dt>clear</dt>
+          <dd>Clears the terminal of all output</dd>
         </dl>
       </div>
     ),
@@ -125,10 +127,10 @@ const Terminal = (props: TerminalProps) => {
         </p>
         <p>
           I graduated with distinction from the University of Cape Town with a
-          Bachelor of Business Science in Computer Science. This was a four
-          year, honours equivalent, degree. It comprised of four years of
-          computer science courses, as well as many business courses (for
-          example, I completed three years of economics, stats, and finance).
+          Bachelor of Business Science degree in Computer Science. It comprised
+          of four years of computer science courses, as well as many business
+          courses (for example, I completed three years of economics, stats, and
+          finance).
         </p>
         <p>
           I also have an MSc degree in Computer Science from the University of
@@ -200,7 +202,7 @@ const Terminal = (props: TerminalProps) => {
           </a>{" "}
           that provides property managers and buildings with some really cool
           software. The project uses TypeScript, Node.js, React (with
-          Material-UI components) with Node.js and Firebase.
+          Material-UI components) and Firebase.
         </p>
         <p>
           You can also check out my MSc thesis{" "}
@@ -397,7 +399,7 @@ const Terminal = (props: TerminalProps) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://www.ronniepyne.com)"
+            href="http://www.ronniepyne.com"
           >
             Ronnie Pyne
           </a>
