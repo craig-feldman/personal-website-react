@@ -521,7 +521,7 @@ const Terminal = (props: TerminalProps) => {
           <span>{input}</span>
         </div>
       );
-      setOutput([...output, commandRecord, matchingCommands.join("\t")]);
+      setOutput([...output, commandRecord, matchingCommands.join("    ")]);
       return input;
     }
   };
