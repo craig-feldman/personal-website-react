@@ -120,10 +120,18 @@ const Terminal = (props: TerminalProps) => {
           Cape Town.
         </p>
         <p>
-          I graduated with distinction from University of Cape Town and have an
-          MSc degree from the University of Oxford, where I was awarded a full
-          academic scholarship. Nowadays I'm developing a method to download
-          food... I wish!
+          I graduated with distinction from the University of Cape Town with a
+          Bachelor of Business Science in Computer Science. This was a four
+          year, honours equivalent, degree. It comprised of four years of
+          computer science courses, as well as many business courses (for
+          example, I completed three years of economics, stats, and finance).
+        </p>
+        <p>
+          I also have an MSc degree in Computer Science from the University of
+          Oxford, where I was awarded a full academic scholarship. Studying
+          abroad was an amazing experience - highlights include early morning
+          rowing, croquet, formal dinners, and just exploring Oxford with
+          amazing people and friends.
         </p>
         <p>
           Some of my interests include{" "}
@@ -132,7 +140,7 @@ const Terminal = (props: TerminalProps) => {
         </p>
         <p>
           My previous formal work experience includes working on asset
-          management software{" "}
+          management software at{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -140,7 +148,7 @@ const Terminal = (props: TerminalProps) => {
           >
             Fundamental Software
           </a>
-          , as well as working for a content creation app{" "}
+          , as well as working for a great content creation app called{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -151,8 +159,9 @@ const Terminal = (props: TerminalProps) => {
           .
         </p>
         <p>
-          I am currently focusing on some personal projects and am bootstrapping
-          my own startup (check it out,{" "}
+          Nowadays I'm developing a method to download food... I wish! I am
+          currently focusing on some personal projects and am bootstrapping my
+          own startup (check it out,{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -186,17 +195,14 @@ const Terminal = (props: TerminalProps) => {
             WeaverWorks
           </a>{" "}
           that provides property managers and buildings with some really cool
-          software. The project is built in React with Node.js and Typescript.
-          It utilises Firebase and components from Material-UI.
+          software. The project uses TypeScript, Node.js, React (with
+          Material-UI components) with Node.js and Firebase.
         </p>
         <p>
-          You can also check out my university{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://pubs.cs.uct.ac.za/honsproj/cgi-bin/view/2015/feldman_meyer.zip/index.html"
-          >
-            honours project
+          You can also check out my MSc thesis{" "}
+          <a href="MSc_Thesis.pdf" download="Craig Feldman - MSc Thesis.pdf">
+            An investigation into the applicability of a blockchain based voting
+            system
           </a>{" "}
           - this one took a while!
         </p>
