@@ -219,7 +219,7 @@ const Terminal = (props: TerminalProps) => {
         <dl>
           <dt>Email</dt>
           <dd>
-            <a href="mailto:craig.feldy@gmail.com">craig.feldy@gmail.com</a>
+            <a href="mailto:craig@craigfeldman.com">craig@craigfeldman.com</a>
           </dd>
           <dt>Smoke signals</dt>
           <dd>general Cape Town region</dd>
