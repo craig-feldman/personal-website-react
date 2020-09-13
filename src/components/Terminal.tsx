@@ -166,21 +166,16 @@ const Terminal = (props: TerminalProps) => {
         </p>
         <p>
           Nowadays I'm developing a method to download food... I wish! I am
-          currently focusing on some personal projects and am bootstrapping my
-          own startup (check it out,{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://weaverworks.co.za"
-          >
-            here
+          currently working at{" "}
+          <a target="_blank" rel="noopener noreferrer" href="https://luno.com">
+            Luno
           </a>
-          ) but please feel free to get in touch with me to discuss any cool
-          opportunities!
+          , where we help people to buy, store, and learn about cryptocurrency.
         </p>
         <p>
-          My contact details can be found by typing 'contact', and if you would
-          like to check out my CV, simply type 'download_CV'.
+          Please feel free to get in touch with me to discuss any cool
+          opportunities. My contact details can be found by typing 'contact',
+          and if you would like to check out my CV, simply type 'download_CV'.
         </p>
       </div>
     ),
