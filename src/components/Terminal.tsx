@@ -300,6 +300,15 @@ const Terminal = (props: TerminalProps) => {
             </span>{" "}
             ##
           </dd>
+          <dt>Go</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#00DE12", textShadow: "0 0 5px #00DE12" }}>
+              ############
+            </span>
+            {"  "}
+            ##
+          </dd>
           <dt>Java</dt>
           <dd>
             ##{" "}
