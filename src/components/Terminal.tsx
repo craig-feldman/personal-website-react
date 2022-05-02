@@ -4,6 +4,8 @@ import TerminalOutput from "./TerminalOutput";
 import InputArea from "./InputArea";
 import ErrorMessage from "./ErrorMessage";
 import WelcomeMessage from "./WelcomeMessage";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../firebase";
 
 // Just a little helper function so I don't have to continually update my age
 const getAge = (birthDate: Date) => {
@@ -427,6 +429,8 @@ const Terminal = (props: TerminalProps) => {
   };
 
   const processCommand = (input: string) => {
+    logEvent(analytics, "command_received", { command: input });
+
     // Store a record of this command with a ref to allow us to scroll it into view.
     // Note: We use a ref callback here because setting the ref directly, then clearing output seems to set the ref to null.
     const commandRecord = (
