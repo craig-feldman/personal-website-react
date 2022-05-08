@@ -56,7 +56,7 @@ const Terminal = (props: TerminalProps) => {
     "website",
   ] as const;
   type EchoCommand = typeof echoCommands[number];
-  const utilityCommands = ["clear", "all", "download_cv"] as const;
+  const utilityCommands = ["clear", "all", "cv"] as const;
   type UtilityCommand = typeof utilityCommands[number];
   const allCommands = [...echoCommands, ...utilityCommands] as const;
   type Command = typeof allCommands[number];
@@ -97,8 +97,8 @@ const Terminal = (props: TerminalProps) => {
           <dd>A bit of boasting</dd>
           <dt>repo</dt>
           <dd>Take a look at some of my work</dd>
-          <dt>download_cv</dt>
-          <dd>Check out my CV [pdf - 168KB]</dd>
+          <dt>cv</dt>
+          <dd>Check out my CV [pdf - 197KB]</dd>
           <dt>contact</dt>
           <dd>Bring on the spam</dd>
           <dt>website</dt>
@@ -142,42 +142,70 @@ const Terminal = (props: TerminalProps) => {
           amazing people and friends.
         </p>
         <p>
-          Some of my interests include{" "}
-          {glow("machine learning, computer security, and cryptography")}. I'm
-          also pretty into fly fishing!
+          Some of my interests include: machine learning, the blockchain and
+          cryptography, and leveraging these tools to help solve problems,
+          particularly in the {glow("fintech")} space. I'm also pretty into fly
+          fishing!
         </p>
         <p>
-          My previous formal work experience includes working on asset
-          management software at{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.fundamental.net"
-          >
-            Fundamental Software
-          </a>
-          , as well as working for a great content creation app called{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://madewithover.com"
-          >
-            Over
-          </a>
-          .
+          My previous formal work experience includes:
+          <ul>
+            <li>
+              working on asset management software at{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.fundamental.net"
+              >
+                Fundamental Software
+              </a>
+              ;
+            </li>
+            <li>
+              working for a great content creation app called{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://madewithover.com"
+              >
+                Over
+              </a>
+              ;
+            </li>
+            <li>
+              helping people to buy, store, and learn about cryptocurrency at{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://luno.com"
+              >
+                Luno
+              </a>
+              .
+            </li>
+          </ul>
         </p>
         <p>
           Nowadays I'm developing a method to download food... I wish! I am
           currently working at{" "}
-          <a target="_blank" rel="noopener noreferrer" href="https://luno.com">
-            Luno
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://stitch.money"
+          >
+            Stitch
           </a>
-          , where we help people to buy, store, and learn about cryptocurrency.
+          , developing a single API for payments and financial data in Africa.
         </p>
         <p>
           Please feel free to get in touch with me to discuss any cool
           opportunities. My contact details can be found by typing 'contact',
-          and if you would like to check out my CV, simply type 'download_CV'.
+          and if you would like to check out my {glow("CV")}, simply type 'cv'
+          or click{" "}
+          <a href="CV.pdf" download="Craig Feldman - Curriculum Vitae.pdf">
+            here
+          </a>
+          .
         </p>
       </div>
     ),
@@ -189,16 +217,16 @@ const Terminal = (props: TerminalProps) => {
           to get the links.
         </p>
         <p>
-          I have my own startup called{" "}
+          I've also dabbled in producing a{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://weaverworks.co.za"
           >
-            WeaverWorks
+            property-management portal
           </a>{" "}
           that provides property managers and buildings with some really cool
-          software. The project uses TypeScript, Node.js, React (with
+          software and tools. The project uses TypeScript, Node.js, React (with
           Material-UI components) and Firebase.
         </p>
         <p>
@@ -293,8 +321,9 @@ const Terminal = (props: TerminalProps) => {
     ),
     skills: (
       <>
+        <div className="terminal-heading">Languages</div>
         <dl>
-          <dt>Kotlin</dt>
+          <dt>TypeScript</dt>
           <dd>
             ##{" "}
             <span style={{ color: "#00DE12", textShadow: "0 0 5px #00DE12" }}>
@@ -311,7 +340,7 @@ const Terminal = (props: TerminalProps) => {
             {"  "}
             ##
           </dd>
-          <dt>Java</dt>
+          <dt>Kotlin</dt>
           <dd>
             ##{" "}
             <span style={{ color: "#42D100", textShadow: "0 0 5px #42D100" }}>
@@ -320,7 +349,7 @@ const Terminal = (props: TerminalProps) => {
             {"   "}
             ##
           </dd>
-          <dt>TypeScript</dt>
+          <dt>Java</dt>
           <dd>
             ##{" "}
             <span style={{ color: "#42D100", textShadow: "0 0 5px #42D100" }}>
@@ -348,6 +377,8 @@ const Terminal = (props: TerminalProps) => {
             ##
           </dd>
         </dl>
+
+        <div className="terminal-heading">Cloud &amp; Infrastructure</div>
         <dl>
           <dt>GCP / Firebase</dt>
           <dd>
@@ -358,7 +389,42 @@ const Terminal = (props: TerminalProps) => {
             {"     "}
             ##
           </dd>
+          <dt>Azure</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#99D100", textShadow: "0 0 5px 99D100" }}>
+              #########
+            </span>
+            {"     "}
+            ##
+          </dd>
+          <dt>AWS</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#99D100", textShadow: "0 0 5px #99D100" }}>
+              ########
+            </span>
+            {"      "}
+            ##
+          </dd>
+          <dt>
+            Infrastructure <br />
+            <span style={{ fontSize: "smaller" }}>
+              (Docker, Kubernetes, DBs, etc.)
+            </span>
+          </dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#99D100", textShadow: "0 0 5px 99D100" }}>
+              #########
+            </span>
+            {"     "}
+            ##
+          </dd>
+        </dl>
 
+        <div className="terminal-heading">Web</div>
+        <dl>
           <dt>React</dt>
           <dd>
             ##{" "}
@@ -368,7 +434,15 @@ const Terminal = (props: TerminalProps) => {
             {"  "}
             ##
           </dd>
-
+          <dt>Angular</dt>
+          <dd>
+            ##{" "}
+            <span style={{ color: "#D16200", textShadow: "0 0 5px #D16200" }}>
+              #####
+            </span>
+            {"         "}
+            ##
+          </dd>
           <dt>General web development</dt>
           <dd>
             ##{" "}
@@ -483,10 +557,7 @@ const Terminal = (props: TerminalProps) => {
             "website",
           ].map((command) => (
             <>
-              <div>
-                <span className="terminal-prompt">--</span>{" "}
-                <span>{command}</span>
-              </div>
+              <div className="terminal-heading">{command}</div>
               <div className="terminal-command-output">
                 {commands[command as EchoCommand]}
               </div>
@@ -496,7 +567,7 @@ const Terminal = (props: TerminalProps) => {
           setOutput([commandRecord, ...allCommandsOutput]);
           break;
         }
-        case "download_cv": {
+        case "cv": {
           setOutput([...output, commandRecord]);
           downloadFile("CV.pdf", "Craig Feldman - Curriculum Vitae.pdf");
           break;

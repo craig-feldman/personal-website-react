@@ -81,6 +81,11 @@
   margin-right: 5px;
 }
 
+.terminal-heading::before {
+  margin-right: 5px;
+  content: '-- '
+}
+
 .terminal-input {
   font-family: inherit;
   font-size: inherit;
