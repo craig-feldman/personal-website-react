@@ -1,6 +1,5 @@
 {
   "name": "craigfeldman.com",
-  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@types/node": "^17.0.31",
