@@ -263,7 +263,7 @@ const Terminal = (props: TerminalProps) => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://graduate.standardbank.com/standimg/Graduate/DerekCooperAfricaScholarship.html"
+              href="https://www.standardbank.com/sbg/careers/early-careers/early-careers-overview/chairmans-scholarship"
             >
               view scholarship
             </a>
