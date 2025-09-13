@@ -7,6 +7,10 @@ type WelcomeMessageProps = {
 const WelcomeMessage = (props: WelcomeMessageProps) => {
   const welcomeMessageRef = React.useRef<HTMLDivElement>(null);
   useEffect(() => {
+    if (welcomeMessageRef.current) {
+      // Clear previous text
+      welcomeMessageRef.current.textContent = ""; 
+    }
     if (props.inputRef.current) {
       props.inputRef.current.disabled = true;
     }
@@ -27,6 +31,7 @@ const WelcomeMessage = (props: WelcomeMessageProps) => {
         }
       }
     }, 30);
+    return () => clearInterval(typeText); // Cleanup on unmount to prevent overlapping intervals
   }, [props.inputRef, props.message]);
   return (
     <div ref={welcomeMessageRef} className="terminal-welcome-message"></div>
