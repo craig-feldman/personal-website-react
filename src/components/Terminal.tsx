@@ -90,6 +90,8 @@ const Terminal = (props: TerminalProps) => {
         <dl>
           <dt>about</dt>
           <dd>Stop stalking me</dd>
+          <dt>employment</dt>
+          <dd>Where I've worked</dd>
           <dt>projects</dt>
           <dd>Yeah, I've made some cool stuff before</dd>
           <dt>skills</dt>
@@ -99,7 +101,7 @@ const Terminal = (props: TerminalProps) => {
           <dt>repo</dt>
           <dd>Take a look at some of my work</dd>
           <dt>cv</dt>
-          <dd>Check out my CV [pdf - 197KB]</dd>
+          <dd>Check out my CV [pdf - 103KB]</dd>
           <dt>contact</dt>
           <dd>Bring on the spam</dd>
           <dt>website</dt>
