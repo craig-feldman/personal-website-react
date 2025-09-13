@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 
 type InputAreaProps = {
   terminalPrompt: string;
@@ -6,7 +6,7 @@ type InputAreaProps = {
   processCommand: (input: string) => void;
   getHistory: (direction: "up" | "down") => string;
   getAutocomplete: (input: string) => string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 const InputArea = (props: InputAreaProps) => {
   const [input, setInput] = useState("");

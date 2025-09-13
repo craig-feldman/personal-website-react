@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 
 type WelcomeMessageProps = {
   message: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 const WelcomeMessage = (props: WelcomeMessageProps) => {
   const welcomeMessageRef = React.useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (welcomeMessageRef.current) {
       // Clear previous text
-      welcomeMessageRef.current.textContent = ""; 
+      welcomeMessageRef.current.textContent = "";
     }
     if (props.inputRef.current) {
       props.inputRef.current.disabled = true;

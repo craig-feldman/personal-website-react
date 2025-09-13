@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, JSX } from "react";
 import Banner from "./Banner";
 import TerminalOutput from "./TerminalOutput";
 import InputArea from "./InputArea";
@@ -36,7 +36,7 @@ const Terminal = (props: TerminalProps) => {
   const [output, setOutput] = useState<(string | JSX.Element)[]>([]);
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(3);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
 
   const scrollLastCommandTop = () => {
@@ -678,7 +678,9 @@ const Terminal = (props: TerminalProps) => {
     // Note: We use a ref callback here because setting the ref directly, then clearing output seems to set the ref to null.
     const commandRecord = (
       <div
-        ref={(el) => (scrollRef.current = el)}
+        ref={(el) => {
+          scrollRef.current = el;
+        }}
         className="terminal-command-record"
       >
         <span className="terminal-prompt">{terminalPrompt}</span>{" "}
@@ -765,7 +767,9 @@ const Terminal = (props: TerminalProps) => {
     } else {
       const commandRecord = (
         <div
-          ref={(el) => (scrollRef.current = el)}
+          ref={(el) => {
+            scrollRef.current = el;
+          }}
           className="terminal-command-record"
         >
           <span className="terminal-prompt">{terminalPrompt}</span>{" "}
