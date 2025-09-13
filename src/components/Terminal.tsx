@@ -193,7 +193,7 @@ const Terminal = (props: TerminalProps) => {
           develops. My most recent role involves ensuring efficient and
           effective scalability and growth from a technical perspective.
         </p>
-        <p>
+        <span>
           My previous formal work experience includes:
           <ul>
             <li>
@@ -230,7 +230,7 @@ const Terminal = (props: TerminalProps) => {
               .
             </li>
           </ul>
-        </p>
+        </span>
         <p>
           Nowadays I'm developing a method to download food... I wish! I am
           currently working at{" "}
